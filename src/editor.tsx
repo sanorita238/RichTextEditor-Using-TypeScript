@@ -1,0 +1,84 @@
+import React, { Component,MouseEvent } from 'react'
+import { Row, Button, Col, Form } from 'react-bootstrap';
+
+//usestate used in function component 
+//always use func component
+// rfc shortcut for func component
+//class component aise define states
+// <any, any> removes typecheck in typescript
+class editor extends Component <any, any>{
+
+    //props:dp array/argument
+    //states defined in class component
+    constructor(props:any){
+        super(props); //to read
+        this.state = {
+            textInBox:"", 
+            isBold: false,
+            isItalic:false,
+            isBullet:false,
+            isCenter:false,
+            isLeft:false,
+            isRight:false,
+            //global variable
+
+        };
+    }
+
+    handleOnClick = ()=>{
+        this.setState({isBold:!this.state.isBold})
+    };
+    handleItalic = ()=>{
+        this.setState({isItalic:!this.state.isItalic})
+    };
+   handleErase = () =>{
+       this.setState({textInBox:""})
+   };
+   handleBullet = () =>{
+        this.setState({isBullet:!this.state.isBullet})
+   };
+   handleLeft = () ={
+       this.setState({isLeft:!this.state.isLeft})
+   };
+   handleRight = () ={
+        this.setState({isLeft:!this.state.isLeft})
+    };
+    handleCenter = () ={
+        this.setState({isLeft:!this.state.isLeft})
+    };
+  render() {
+      const {
+        textInBox
+      } = this.state;
+    return (
+      <div>
+          <div className='btn'>                 
+          <Button variant="primary" onClick={this.handleOnClick}>Bold</Button>{' '}
+                 <Button variant="secondary" onClick={this.handleItalic}>Italic</Button>{' '}
+                 <Button variant="success">Hyperlink</Button>{' '}
+                 <Button variant="warning" onClick={this.handleBullet}>BulletPoints</Button>{' '}
+                 <Button variant="danger" onClick={this.handleLeft}>Left Align</Button>{' '}
+                 <Button variant="danger"onClick={this.handleCenter}>Center Align</Button>{' '}
+                 <Button variant="danger" onClick={this.handleRight}>Right Align</Button>{' '}
+                 <Button variant="light">Font size</Button>{' '}
+                 <Button variant="light" onClick={this.handleErase}>Erase</Button>{' '}
+                 <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1" >
+                     <Form.Label></Form.Label>
+                     <Form.Control as="textarea" rows={3} value = {textInBox}
+                     style = {{
+                         fontWeight: this.state.isBold?'bold':'normal',
+                         fontStyle:this.state.isItalic?'italic':'normal',
+                         listStyleType: this.state.isBullet?'cirlce':'',
+                         textAlign:this.state.
+                     }}
+                     onChange={(e)=>{
+                         this.setState({textInBox:e.target.value});
+                     }}/>
+               </Form.Group>
+            </div>
+      </div>
+    )
+  }
+}
+
+export default editor;
