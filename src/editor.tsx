@@ -20,6 +20,8 @@ class editor extends Component <any, any>{
             isCenter:false,
             isLeft:false,
             isRight:false,
+            isBig:false,
+            isUnderline:false,
             //global variable
 
         };
@@ -37,14 +39,20 @@ class editor extends Component <any, any>{
    handleBullet = () =>{
         this.setState({isBullet:!this.state.isBullet})
    };
-   handleLeft = () ={
+   handleLeft = () =>{
        this.setState({isLeft:!this.state.isLeft})
    };
-   handleRight = () ={
-        this.setState({isLeft:!this.state.isLeft})
+   handleCenter = () =>{
+        this.setState({isCenter:!this.state.isCenter})
     };
-    handleCenter = () ={
-        this.setState({isLeft:!this.state.isLeft})
+    handleRight = () =>{
+        this.setState({isRight:!this.state.isRight})
+    };
+    handleBig = () =>{
+        this.setState({isBig:!this.state.isBig})
+    };
+    handleUnderline = () =>{
+        this.setState({isUnderline:!this.state.isUnderline})
     };
   render() {
       const {
@@ -55,12 +63,12 @@ class editor extends Component <any, any>{
           <div className='btn'>                 
           <Button variant="primary" onClick={this.handleOnClick}>Bold</Button>{' '}
                  <Button variant="secondary" onClick={this.handleItalic}>Italic</Button>{' '}
-                 <Button variant="success">Hyperlink</Button>{' '}
+                 <Button variant="success" onClick={this.handleUnderline}>Hyperlink</Button>{' '}
                  <Button variant="warning" onClick={this.handleBullet}>BulletPoints</Button>{' '}
                  <Button variant="danger" onClick={this.handleLeft}>Left Align</Button>{' '}
                  <Button variant="danger"onClick={this.handleCenter}>Center Align</Button>{' '}
                  <Button variant="danger" onClick={this.handleRight}>Right Align</Button>{' '}
-                 <Button variant="light">Font size</Button>{' '}
+                 <Button variant="light" onClick={this.handleBig}>Font size</Button>{' '}
                  <Button variant="light" onClick={this.handleErase}>Erase</Button>{' '}
                  <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1" >
                      <Form.Label></Form.Label>
@@ -68,8 +76,12 @@ class editor extends Component <any, any>{
                      style = {{
                          fontWeight: this.state.isBold?'bold':'normal',
                          fontStyle:this.state.isItalic?'italic':'normal',
-                         listStyleType: this.state.isBullet?'cirlce':'',
-                         textAlign:this.state.
+                         textAlign:this.state.isCenter?'center':'',
+                         fontSize:this.state.isBig?'large':'small',
+                         textDecoration:this.state.isUnderline?'underline':'',
+                         display:this.state.isBullet?'list-item':'',    
+                         listStyleType:this.state.isBullet?'disc':'',
+                        //  listStylePosition:this.state.isBullet?'inside':'',
                      }}
                      onChange={(e)=>{
                          this.setState({textInBox:e.target.value});
